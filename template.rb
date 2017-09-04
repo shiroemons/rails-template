@@ -103,3 +103,42 @@ insert_into_file 'config/environments/development.rb', <<RUBY, after: 'config.fi
     Bullet.rails_logger = true
   end
 RUBY
+
+
+# setup rspec
+generate 'rspec:install'
+
+create_file '.rspec', <<EOF, force: true
+--color -f d
+EOF
+
+insert_into_file 'spec/spec_helper.rb', <<RUBY, before: 'RSpec.configure do |config|'
+require 'factory_girl_rails'
+require 'vcr'
+RUBY
+
+insert_into_file 'spec/spec_helper.rb', <<RUBY, after: 'RSpec.configure do |config|'
+
+  config.before :suite do
+    DatabaseRewinder.clean_all
+  end
+
+  config.after :each do
+    DatabaseRewinder.clean
+  end
+
+  config.before :all do
+    FactoryGirl.reload
+    FactoryGirl.factories.clear
+    FactoryGirl.sequences.clear
+    FactoryGirl.find_definitions
+  end
+
+  config.include FactoryGirl::Syntax::Methods
+
+  VCR.configure do |c|
+    c.cassette_library_dir = 'spec/vcr'
+    c.hook_into :webmock
+    c.allow_http_connections_when_no_cassette = true
+  end
+RUBY
