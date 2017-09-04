@@ -58,3 +58,6 @@ rails_command 'haml:replace_erbs'
 
 # Webpacker
 rails_command 'webpacker:install'
+
+# Generate secret key
+run 'bundle exec rails secrets:setup'
