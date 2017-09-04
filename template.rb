@@ -51,7 +51,9 @@ gem_group :test do
 end
 
 # install gems
-run 'bundle install --path vendor/bundle --jobs=4'
+Bundler.with_clean_env do
+  run 'bundle install --path vendor/bundle --jobs=4'
+end
 
 # convert erb file to haml
 rails_command 'haml:replace_erbs'
