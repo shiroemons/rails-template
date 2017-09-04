@@ -55,3 +55,6 @@ run 'bundle install --path vendor/bundle --jobs=4'
 
 # convert erb file to haml
 rails_command 'haml:replace_erbs'
+
+# Webpacker
+rails_command 'webpacker:install'
