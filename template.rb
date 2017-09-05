@@ -142,3 +142,6 @@ insert_into_file 'spec/spec_helper.rb', <<RUBY, after: 'RSpec.configure do |conf
     c.allow_http_connections_when_no_cassette = true
   end
 RUBY
+
+# set up spring
+run 'bundle exec spring binstub --all'
