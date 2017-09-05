@@ -143,15 +143,19 @@ insert_into_file 'spec/spec_helper.rb', <<RUBY, after: 'RSpec.configure do |conf
   end
 RUBY
 
-# set up spring
-run 'bundle exec spring binstub --all'
-
 # DB create
 rails_command 'db:create'
 
 # DB migration
 rails_command 'db:migrate'
 
+# install locales
+remove_file 'config/locales/en.yml'
+generate 'i18n ja'
+generate 'i18n en'
+
+# set up spring
+run 'bundle exec spring binstub --all'
 
 # Remove comment and empty lines
 empty_line_pattern = /^\s*\n/
