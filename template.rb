@@ -151,3 +151,17 @@ rails_command 'db:create'
 
 # DB migration
 rails_command 'db:migrate'
+
+
+# Remove comment and empty lines
+empty_line_pattern = /^\s*\n/
+comment_line_pattern = /^\s*#.*\n/
+
+gsub_file '.gitignore', empty_line_pattern, ''
+gsub_file 'Gemfile', comment_line_pattern, ''
+gsub_file 'Rakefile', empty_line_pattern, ''
+gsub_file 'config.ru', empty_line_pattern, ''
+gsub_file 'config/routes.rb', comment_line_pattern, ''
+gsub_file 'config/routes.rb', empty_line_pattern, ''
+gsub_file 'config/database.yml', comment_line_pattern, ''
+gsub_file 'config/initializers/assets.rb', empty_line_pattern, ''
