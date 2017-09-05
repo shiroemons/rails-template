@@ -169,3 +169,8 @@ gsub_file 'config/routes.rb', comment_line_pattern, ''
 gsub_file 'config/routes.rb', empty_line_pattern, ''
 gsub_file 'config/database.yml', comment_line_pattern, ''
 gsub_file 'config/initializers/assets.rb', empty_line_pattern, ''
+
+# git
+git :init
+git add: '.'
+git commit: "-m 'Initial commit'"
