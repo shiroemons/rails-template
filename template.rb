@@ -145,3 +145,9 @@ RUBY
 
 # set up spring
 run 'bundle exec spring binstub --all'
+
+# DB create
+rails_command 'db:create'
+
+# DB migration
+rails_command 'db:migrate'
